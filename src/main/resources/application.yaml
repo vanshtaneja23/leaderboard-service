@@ -4,3 +4,13 @@ spring:
   grpc:
     server:
       port: ${GRPC_PORT:9090}
+  datasource:
+    # Defaults target the local docker-compose stack. Real deployments inject these from
+    # environment variables (a Kubernetes Secret in k8s/). No real credentials live in the repo.
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/leaderboard}
+    username: ${DB_USERNAME:leaderboard}
+    password: ${DB_PASSWORD:change-me}
+    hikari:
+      maximum-pool-size: ${DB_POOL_SIZE:20}
+  flyway:
+    locations: classpath:db/migration
