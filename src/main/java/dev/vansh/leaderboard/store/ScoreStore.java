@@ -7,7 +7,9 @@ import dev.vansh.leaderboard.core.ScoreSubmission;
 import dev.vansh.leaderboard.core.SubmitOutcome;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 import org.springframework.jdbc.core.simple.JdbcClient;
@@ -141,10 +143,14 @@ public class ScoreStore {
                 .optional();
     }
 
-    public List<String> findLeaderboardIds() {
-        return jdbc.sql("SELECT DISTINCT leaderboard_id FROM leaderboard_entries")
-                .query(String.class)
-                .list();
+    /** Number of ranked players per leaderboard, i.e. how many members each Redis key should have. */
+    public Map<String, Long> countEntriesByLeaderboard() {
+        Map<String, Long> counts = new HashMap<>();
+        jdbc.sql("SELECT leaderboard_id, count(*) AS n FROM leaderboard_entries GROUP BY leaderboard_id")
+                .query(rs -> {
+                    counts.put(rs.getString("leaderboard_id"), rs.getLong("n"));
+                });
+        return counts;
     }
 
     /**

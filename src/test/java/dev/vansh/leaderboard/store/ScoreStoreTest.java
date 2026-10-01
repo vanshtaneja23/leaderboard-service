@@ -2,6 +2,7 @@ package dev.vansh.leaderboard.store;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.entry;
 
 import dev.vansh.leaderboard.core.IdempotencyConflictException;
 import dev.vansh.leaderboard.core.PlayerStats;
@@ -85,7 +86,7 @@ class ScoreStoreTest extends IntegrationTest {
         assertThat(stats.gamesPlayed()).isEqualTo(3);
         assertThat(stats.bestScore()).isEqualTo(700);
         assertThat(store.findEntry("weekly", "alice").orElseThrow().score()).isEqualTo(200);
-        assertThat(store.findLeaderboardIds()).containsExactlyInAnyOrder("weekly", "all-time");
+        assertThat(store.countEntriesByLeaderboard()).containsOnly(entry("weekly", 1L), entry("all-time", 1L));
     }
 
     @Test

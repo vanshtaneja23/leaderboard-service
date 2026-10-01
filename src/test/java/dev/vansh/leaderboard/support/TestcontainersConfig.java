@@ -14,10 +14,10 @@ import org.testcontainers.utility.DockerImageName;
 @TestConfiguration(proxyBeanMethods = false)
 public class TestcontainersConfig {
 
-    static final PostgreSQLContainer POSTGRES =
+    public static final PostgreSQLContainer POSTGRES =
             new PostgreSQLContainer(DockerImageName.parse("postgres:18.6-alpine"));
 
-    static final GenericContainer<?> REDIS =
+    public static final GenericContainer<?> REDIS =
             new GenericContainer<>(DockerImageName.parse("redis:8.8-alpine")).withExposedPorts(6379);
 
     @Bean

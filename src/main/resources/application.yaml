@@ -20,3 +20,8 @@ spring:
       port: ${REDIS_PORT:6379}
       password: ${REDIS_PASSWORD:}
       timeout: 2s
+
+leaderboard:
+  reconcile:
+    # How often to compare Redis against Postgres and rebuild any leaderboard that is missing members.
+    interval: ${RECONCILE_INTERVAL:60s}

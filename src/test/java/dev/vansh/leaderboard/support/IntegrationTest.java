@@ -20,7 +20,9 @@ import org.springframework.jdbc.core.simple.JdbcClient;
  */
 @SpringBootTest(properties = {
         "spring.grpc.server.port=0",
-        "spring.grpc.server.inprocess.name=" + IntegrationTest.IN_PROCESS_NAME
+        "spring.grpc.server.inprocess.name=" + IntegrationTest.IN_PROCESS_NAME,
+        // Tests trigger reconciliation explicitly; keep the background job out of the way.
+        "leaderboard.reconcile.interval=1h"
 })
 @Import(TestcontainersConfig.class)
 public abstract class IntegrationTest {
