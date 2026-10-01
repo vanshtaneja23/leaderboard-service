@@ -1,0 +1,136 @@
+{
+ "date": "2026-10-01T01:38:54-06:00",
+ "endReason": "normal",
+ "options": {
+  "call": "leaderboard.v1.LeaderboardService/SubmitScore",
+  "host": "localhost:9090",
+  "proto": "src/main/proto/leaderboard.proto",
+  "import-paths": [
+   "src/main/proto",
+   "."
+  ],
+  "insecure": true,
+  "load-schedule": "const",
+  "load-start": 0,
+  "load-end": 0,
+  "load-step": 0,
+  "load-step-duration": 0,
+  "load-max-duration": 0,
+  "concurrency": 50,
+  "concurrency-schedule": "const",
+  "concurrency-start": 0,
+  "concurrency-end": 0,
+  "concurrency-step": 1,
+  "concurrency-step-duration": 0,
+  "concurrency-max-duration": 0,
+  "total": 10000,
+  "connections": 10,
+  "timeout": 20000000000,
+  "dial-timeout": 10000000000,
+  "data": {
+   "idempotency_key": "seed-load-20261001-013853-{{.RequestNumber}}",
+   "leaderboard_id": "load-20261001-013853",
+   "player_id": "player-{{.RequestNumber}}",
+   "score": "{{randomInt 0 1000000}}"
+  },
+  "binary": false,
+  "CPUs": 12
+ },
+ "count": 10000,
+ "total": 1336017250,
+ "average": 6557159,
+ "fastest": 1696459,
+ "slowest": 32544875,
+ "rps": 7484.933297081307,
+ "errorDistribution": {},
+ "statusCodeDistribution": {
+  "OK": 10000
+ },
+ "latencyDistribution": [
+  {
+   "percentage": 10,
+   "latency": 4131542
+  },
+  {
+   "percentage": 25,
+   "latency": 5063917
+  },
+  {
+   "percentage": 50,
+   "latency": 6159500
+  },
+  {
+   "percentage": 75,
+   "latency": 7524584
+  },
+  {
+   "percentage": 90,
+   "latency": 9083375
+  },
+  {
+   "percentage": 95,
+   "latency": 10384334
+  },
+  {
+   "percentage": 99,
+   "latency": 14992708
+  }
+ ],
+ "histogram": [
+  {
+   "mark": 0.001696459,
+   "count": 1,
+   "frequency": 0.0001
+  },
+  {
+   "mark": 0.0047813006,
+   "count": 1952,
+   "frequency": 0.1952
+  },
+  {
+   "mark": 0.007866142199999999,
+   "count": 6023,
+   "frequency": 0.6023
+  },
+  {
+   "mark": 0.0109509838,
+   "count": 1638,
+   "frequency": 0.1638
+  },
+  {
+   "mark": 0.0140358254,
+   "count": 257,
+   "frequency": 0.0257
+  },
+  {
+   "mark": 0.017120667,
+   "count": 72,
+   "frequency": 0.0072
+  },
+  {
+   "mark": 0.020205508599999998,
+   "count": 6,
+   "frequency": 0.0006
+  },
+  {
+   "mark": 0.023290350199999997,
+   "count": 3,
+   "frequency": 0.0003
+  },
+  {
+   "mark": 0.0263751918,
+   "count": 5,
+   "frequency": 0.0005
+  },
+  {
+   "mark": 0.0294600334,
+   "count": 21,
+   "frequency": 0.0021
+  },
+  {
+   "mark": 0.032544875,
+   "count": 22,
+   "frequency": 0.0022
+  }
+ ]
+}

@@ -1,0 +1,149 @@
+{
+ "date": "2026-10-01T01:39:24-06:00",
+ "endReason": "timeout",
+ "options": {
+  "call": "leaderboard.v1.LeaderboardService/SubmitScore",
+  "host": "localhost:9090",
+  "proto": "src/main/proto/leaderboard.proto",
+  "import-paths": [
+   "src/main/proto",
+   "."
+  ],
+  "insecure": true,
+  "load-schedule": "const",
+  "load-start": 0,
+  "load-end": 0,
+  "load-step": 0,
+  "load-step-duration": 0,
+  "load-max-duration": 0,
+  "concurrency": 50,
+  "concurrency-schedule": "const",
+  "concurrency-start": 0,
+  "concurrency-end": 0,
+  "concurrency-step": 1,
+  "concurrency-step-duration": 0,
+  "concurrency-max-duration": 0,
+  "total": 2147483647,
+  "connections": 10,
+  "duration": 30000000000,
+  "timeout": 20000000000,
+  "dial-timeout": 10000000000,
+  "data": {
+   "idempotency_key": "{{newUUID}}",
+   "leaderboard_id": "load-20261001-013853",
+   "player_id": "player-{{randomInt 0 10000}}",
+   "score": "{{randomInt 0 1000000}}"
+  },
+  "binary": false,
+  "CPUs": 12
+ },
+ "count": 237664,
+ "total": 29999631875,
+ "average": 6247007,
+ "fastest": 1174750,
+ "slowest": 77051792,
+ "rps": 7922.230545703988,
+ "errorDistribution": {
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:60995->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:60996->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:60997->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:60998->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:60999->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61000->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61001->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61002->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61003->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61004->[::1]:9090: use of closed network connection": 5
+ },
+ "statusCodeDistribution": {
+  "OK": 237614,
+  "Unavailable": 50
+ },
+ "latencyDistribution": [
+  {
+   "percentage": 10,
+   "latency": 3953708
+  },
+  {
+   "percentage": 25,
+   "latency": 4828000
+  },
+  {
+   "percentage": 50,
+   "latency": 5898250
+  },
+  {
+   "percentage": 75,
+   "latency": 7221750
+  },
+  {
+   "percentage": 90,
+   "latency": 8805334
+  },
+  {
+   "percentage": 95,
+   "latency": 10006291
+  },
+  {
+   "percentage": 99,
+   "latency": 13433666
+  }
+ ],
+ "histogram": [
+  {
+   "mark": 0.00117475,
+   "count": 1,
+   "frequency": 4.208506232797731e-06
+  },
+  {
+   "mark": 0.008762454199999999,
+   "count": 213312,
+   "frequency": 0.8977248815305495
+  },
+  {
+   "mark": 0.0163501584,
+   "count": 23372,
+   "frequency": 0.09836120767294856
+  },
+  {
+   "mark": 0.0239378626,
+   "count": 707,
+   "frequency": 0.0029754139065879958
+  },
+  {
+   "mark": 0.031525566799999995,
+   "count": 151,
+   "frequency": 0.0006354844411524573
+  },
+  {
+   "mark": 0.039113271,
+   "count": 17,
+   "frequency": 7.154460595756142e-05
+  },
+  {
+   "mark": 0.046700975199999994,
+   "count": 4,
+   "frequency": 1.6834024931190923e-05
+  },
+  {
+   "mark": 0.05428867939999999,
+   "count": 3,
+   "frequency": 1.2625518698393192e-05
+  },
+  {
+   "mark": 0.061876383599999994,
+   "count": 38,
+   "frequency": 0.00015992323684631377
+  },
+  {
+   "mark": 0.06946408779999999,
+   "count": 7,
+   "frequency": 2.9459543629584115e-05
+  },
+  {
+   "mark": 0.077051792,
+   "count": 2,
+   "frequency": 8.417012465595461e-06
+  }
+ ]
+}

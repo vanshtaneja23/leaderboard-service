@@ -1,0 +1,147 @@
+{
+ "date": "2026-10-01T01:37:02-06:00",
+ "endReason": "timeout",
+ "options": {
+  "call": "leaderboard.v1.LeaderboardService/GetTopN",
+  "host": "localhost:9090",
+  "proto": "src/main/proto/leaderboard.proto",
+  "import-paths": [
+   "src/main/proto",
+   "."
+  ],
+  "insecure": true,
+  "load-schedule": "const",
+  "load-start": 0,
+  "load-end": 0,
+  "load-step": 0,
+  "load-step-duration": 0,
+  "load-max-duration": 0,
+  "concurrency": 50,
+  "concurrency-schedule": "const",
+  "concurrency-start": 0,
+  "concurrency-end": 0,
+  "concurrency-step": 1,
+  "concurrency-step-duration": 0,
+  "concurrency-max-duration": 0,
+  "total": 2147483647,
+  "connections": 10,
+  "duration": 30000000000,
+  "timeout": 20000000000,
+  "dial-timeout": 10000000000,
+  "data": {
+   "leaderboard_id": "load-20261001-013559",
+   "n": 10
+  },
+  "binary": false,
+  "CPUs": 12
+ },
+ "count": 561711,
+ "total": 29999859042,
+ "average": 2611254,
+ "fastest": 404541,
+ "slowest": 40180708,
+ "rps": 18723.78797559018,
+ "errorDistribution": {
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:60935->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:60936->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:60937->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:60938->[::1]:9090: use of closed network connection": 4,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:60939->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:60940->[::1]:9090: use of closed network connection": 3,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:60941->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:60942->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:60943->[::1]:9090: use of closed network connection": 4,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:60944->[::1]:9090: use of closed network connection": 5
+ },
+ "statusCodeDistribution": {
+  "OK": 561665,
+  "Unavailable": 46
+ },
+ "latencyDistribution": [
+  {
+   "percentage": 10,
+   "latency": 1363416
+  },
+  {
+   "percentage": 25,
+   "latency": 1709875
+  },
+  {
+   "percentage": 50,
+   "latency": 2243166
+  },
+  {
+   "percentage": 75,
+   "latency": 3057125
+  },
+  {
+   "percentage": 90,
+   "latency": 4174375
+  },
+  {
+   "percentage": 95,
+   "latency": 5090458
+  },
+  {
+   "percentage": 99,
+   "latency": 8385541
+  }
+ ],
+ "histogram": [
+  {
+   "mark": 0.000404541,
+   "count": 1,
+   "frequency": 1.7804207134145798e-06
+  },
+  {
+   "mark": 0.0043821577,
+   "count": 514092,
+   "frequency": 0.9153000454007282
+  },
+  {
+   "mark": 0.0083597744,
+   "count": 41897,
+   "frequency": 0.07459428662993066
+  },
+  {
+   "mark": 0.012337391100000001,
+   "count": 4032,
+   "frequency": 0.007178656316487586
+  },
+  {
+   "mark": 0.016315007800000003,
+   "count": 1120,
+   "frequency": 0.0019940711990243296
+  },
+  {
+   "mark": 0.020292624500000002,
+   "count": 315,
+   "frequency": 0.0005608325247255927
+  },
+  {
+   "mark": 0.024270241200000004,
+   "count": 157,
+   "frequency": 0.00027952605200608904
+  },
+  {
+   "mark": 0.028247857900000003,
+   "count": 33,
+   "frequency": 5.8753883542681135e-05
+  },
+  {
+   "mark": 0.032225474600000005,
+   "count": 9,
+   "frequency": 1.6023786420731218e-05
+  },
+  {
+   "mark": 0.036203091300000004,
+   "count": 8,
+   "frequency": 1.4243365707316639e-05
+  },
+  {
+   "mark": 0.040180708,
+   "count": 1,
+   "frequency": 1.7804207134145798e-06
+  }
+ ]
+}

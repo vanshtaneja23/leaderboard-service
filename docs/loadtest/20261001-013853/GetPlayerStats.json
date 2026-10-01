@@ -1,0 +1,148 @@
+{
+ "date": "2026-10-01T01:40:55-06:00",
+ "endReason": "timeout",
+ "options": {
+  "call": "leaderboard.v1.LeaderboardService/GetPlayerStats",
+  "host": "localhost:9090",
+  "proto": "src/main/proto/leaderboard.proto",
+  "import-paths": [
+   "src/main/proto",
+   "."
+  ],
+  "insecure": true,
+  "load-schedule": "const",
+  "load-start": 0,
+  "load-end": 0,
+  "load-step": 0,
+  "load-step-duration": 0,
+  "load-max-duration": 0,
+  "concurrency": 50,
+  "concurrency-schedule": "const",
+  "concurrency-start": 0,
+  "concurrency-end": 0,
+  "concurrency-step": 1,
+  "concurrency-step-duration": 0,
+  "concurrency-max-duration": 0,
+  "total": 2147483647,
+  "connections": 10,
+  "duration": 30000000000,
+  "timeout": 20000000000,
+  "dial-timeout": 10000000000,
+  "data": {
+   "player_id": "player-{{randomInt 0 10000}}"
+  },
+  "binary": false,
+  "CPUs": 12
+ },
+ "count": 613579,
+ "total": 29999644625,
+ "average": 2375484,
+ "fastest": 189250,
+ "slowest": 40833125,
+ "rps": 20452.875614689052,
+ "errorDistribution": {
+  "rpc error: code = Canceled desc = grpc: the client connection is closing": 1,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61032->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61033->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61034->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61035->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61036->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61037->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61038->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61039->[::1]:9090: use of closed network connection": 4,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61040->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61041->[::1]:9090: use of closed network connection": 5
+ },
+ "statusCodeDistribution": {
+  "Canceled": 1,
+  "OK": 613529,
+  "Unavailable": 49
+ },
+ "latencyDistribution": [
+  {
+   "percentage": 10,
+   "latency": 1023167
+  },
+  {
+   "percentage": 25,
+   "latency": 1394334
+  },
+  {
+   "percentage": 50,
+   "latency": 1970583
+  },
+  {
+   "percentage": 75,
+   "latency": 2846750
+  },
+  {
+   "percentage": 90,
+   "latency": 4137375
+  },
+  {
+   "percentage": 95,
+   "latency": 5215917
+  },
+  {
+   "percentage": 99,
+   "latency": 8380375
+  }
+ ],
+ "histogram": [
+  {
+   "mark": 0.00018925,
+   "count": 1,
+   "frequency": 1.6299148043531765e-06
+  },
+  {
+   "mark": 0.0042536375,
+   "count": 556765,
+   "frequency": 0.9074795160456963
+  },
+  {
+   "mark": 0.008318025,
+   "count": 50477,
+   "frequency": 0.08227320957933529
+  },
+  {
+   "mark": 0.012382412499999999,
+   "count": 4796,
+   "frequency": 0.007817071401677833
+  },
+  {
+   "mark": 0.016446799999999998,
+   "count": 1029,
+   "frequency": 0.0016771823336794187
+  },
+  {
+   "mark": 0.0205111875,
+   "count": 261,
+   "frequency": 0.00042540776393617906
+  },
+  {
+   "mark": 0.024575575,
+   "count": 134,
+   "frequency": 0.00021840858378332565
+  },
+  {
+   "mark": 0.028639962499999998,
+   "count": 35,
+   "frequency": 5.704701815236118e-05
+  },
+  {
+   "mark": 0.03270435,
+   "count": 13,
+   "frequency": 2.1188892456591295e-05
+  },
+  {
+   "mark": 0.036768737499999996,
+   "count": 3,
+   "frequency": 4.8897444130595295e-06
+  },
+  {
+   "mark": 0.040833125,
+   "count": 15,
+   "frequency": 2.4448722065297647e-05
+  }
+ ]
+}

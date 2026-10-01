@@ -1,0 +1,148 @@
+{
+ "date": "2026-10-01T01:40:25-06:00",
+ "endReason": "timeout",
+ "options": {
+  "call": "leaderboard.v1.LeaderboardService/GetPlayerRank",
+  "host": "localhost:9090",
+  "proto": "src/main/proto/leaderboard.proto",
+  "import-paths": [
+   "src/main/proto",
+   "."
+  ],
+  "insecure": true,
+  "load-schedule": "const",
+  "load-start": 0,
+  "load-end": 0,
+  "load-step": 0,
+  "load-step-duration": 0,
+  "load-max-duration": 0,
+  "concurrency": 50,
+  "concurrency-schedule": "const",
+  "concurrency-start": 0,
+  "concurrency-end": 0,
+  "concurrency-step": 1,
+  "concurrency-step-duration": 0,
+  "concurrency-max-duration": 0,
+  "total": 2147483647,
+  "connections": 10,
+  "duration": 30000000000,
+  "timeout": 20000000000,
+  "dial-timeout": 10000000000,
+  "data": {
+   "leaderboard_id": "load-20261001-013853",
+   "neighbors": 5,
+   "player_id": "player-{{randomInt 0 10000}}"
+  },
+  "binary": false,
+  "CPUs": 12
+ },
+ "count": 525517,
+ "total": 30000034416,
+ "average": 2779866,
+ "fastest": 456625,
+ "slowest": 30531750,
+ "rps": 17517.213237586308,
+ "errorDistribution": {
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61019->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61020->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61021->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61022->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61023->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61024->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61025->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61026->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61027->[::1]:9090: use of closed network connection": 5,
+  "rpc error: code = Unavailable desc = error reading from server: read tcp [::1]:61028->[::1]:9090: use of closed network connection": 5
+ },
+ "statusCodeDistribution": {
+  "OK": 525467,
+  "Unavailable": 50
+ },
+ "latencyDistribution": [
+  {
+   "percentage": 10,
+   "latency": 1534083
+  },
+  {
+   "percentage": 25,
+   "latency": 1908125
+  },
+  {
+   "percentage": 50,
+   "latency": 2465250
+  },
+  {
+   "percentage": 75,
+   "latency": 3252584
+  },
+  {
+   "percentage": 90,
+   "latency": 4300750
+  },
+  {
+   "percentage": 95,
+   "latency": 5163084
+  },
+  {
+   "percentage": 99,
+   "latency": 7995083
+  }
+ ],
+ "histogram": [
+  {
+   "mark": 0.000456625,
+   "count": 1,
+   "frequency": 1.903069079504517e-06
+  },
+  {
+   "mark": 0.0034641375,
+   "count": 416479,
+   "frequency": 0.7925883071629617
+  },
+  {
+   "mark": 0.006471650000000001,
+   "count": 97891,
+   "frequency": 0.18629333526177666
+  },
+  {
+   "mark": 0.0094791625,
+   "count": 8258,
+   "frequency": 0.0157155444585483
+  },
+  {
+   "mark": 0.012486675000000001,
+   "count": 1760,
+   "frequency": 0.00334940157992795
+  },
+  {
+   "mark": 0.015494187500000001,
+   "count": 675,
+   "frequency": 0.0012845716286655488
+  },
+  {
+   "mark": 0.0185017,
+   "count": 251,
+   "frequency": 0.00047767033895563377
+  },
+  {
+   "mark": 0.0215092125,
+   "count": 97,
+   "frequency": 0.00018459770071193815
+  },
+  {
+   "mark": 0.024516725,
+   "count": 35,
+   "frequency": 6.660741778265809e-05
+  },
+  {
+   "mark": 0.0275242375,
+   "count": 12,
+   "frequency": 2.2836828954054203e-05
+  },
+  {
+   "mark": 0.03053175,
+   "count": 8,
+   "frequency": 1.5224552636036136e-05
+  }
+ ]
+}
