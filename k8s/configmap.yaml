@@ -1,0 +1,12 @@
+# Non-secret configuration, injected into the app as environment variables.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: leaderboard-config
+data:
+  DB_URL: jdbc:postgresql://postgres:5432/leaderboard
+  DB_USERNAME: leaderboard
+  DB_POOL_SIZE: "20"
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
+  RECONCILE_INTERVAL: 30s

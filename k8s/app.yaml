@@ -1,0 +1,90 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: leaderboard-service
+spec:
+  selector:
+    app: leaderboard-service
+  ports:
+    - name: grpc
+      port: 9090
+      targetPort: grpc
+    - name: http
+      port: 8080
+      targetPort: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: leaderboard-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: leaderboard-service
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0   # never drop below 2 ready pods during a deploy
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: leaderboard-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: /actuator/prometheus
+    spec:
+      terminationGracePeriodSeconds: 40
+      containers:
+        - name: app
+          image: leaderboard-service:local
+          imagePullPolicy: Never   # loaded into kind with `kind load docker-image`
+          ports:
+            - name: grpc
+              containerPort: 9090
+            - name: http
+              containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: leaderboard-config
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: leaderboard-secrets
+                  key: DB_PASSWORD
+          # Startup covers JVM boot + Flyway + the Redis rebuild; liveness only starts after it.
+          startupProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: http
+            periodSeconds: 2
+            failureThreshold: 60
+          # Liveness: "is the process wedged?" Does NOT check Postgres/Redis, so a database outage
+          # doesn't make Kubernetes restart every pod in a loop.
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: http
+            periodSeconds: 10
+            failureThreshold: 3
+          # Readiness: "should this pod get traffic?" Includes Postgres and Redis.
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: http
+            periodSeconds: 5
+            failureThreshold: 2
+          lifecycle:
+            preStop:
+              # Give endpoints time to stop routing here before Spring starts its graceful shutdown.
+              sleep:
+                seconds: 5
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: "2"
+              memory: 768Mi
