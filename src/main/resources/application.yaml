@@ -21,6 +21,39 @@ spring:
       password: ${REDIS_PASSWORD:}
       timeout: 2s
 
+server:
+  # HTTP is only used for actuator (health probes + metrics); the API itself is gRPC on 9090.
+  port: ${HTTP_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      group:
+        # Liveness must NOT depend on Postgres/Redis: a dependency outage should take the pod out of
+        # rotation (readiness), not get it restarted in a loop (liveness).
+        readiness:
+          include: readinessState,db,redis
+  metrics:
+    distribution:
+      # Publish histogram buckets for per-RPC latency so Prometheus can compute p50/p99 across pods.
+      percentiles-histogram:
+        grpc.server: true
+  observations:
+    key-values:
+      application: leaderboard-service
+
+logging:
+  structured:
+    # One JSON object per line (Elastic Common Schema); MDC fields such as request_id are included.
+    format:
+      console: ecs
+
 leaderboard:
   reconcile:
     # How often to compare Redis against Postgres and rebuild any leaderboard that is missing members.

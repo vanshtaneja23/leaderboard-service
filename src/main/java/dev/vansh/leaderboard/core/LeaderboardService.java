@@ -2,6 +2,8 @@ package dev.vansh.leaderboard.core;
 
 import dev.vansh.leaderboard.ranking.RankingStore;
 import dev.vansh.leaderboard.store.ScoreStore;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,25 @@ public class LeaderboardService {
 
     private final ScoreStore store;
     private final RankingStore ranking;
+    private final Counter improved;
+    private final Counter notImproved;
+    private final Counter duplicate;
 
-    public LeaderboardService(ScoreStore store, RankingStore ranking) {
+    public LeaderboardService(ScoreStore store, RankingStore ranking, MeterRegistry meters) {
         this.store = store;
         this.ranking = ranking;
+        // Business-level counter, complementing the per-RPC metrics: e.g. a spike in "duplicate"
+        // means clients are retrying a lot, which usually means something upstream is timing out.
+        this.improved = submissions(meters, "improved");
+        this.notImproved = submissions(meters, "not_improved");
+        this.duplicate = submissions(meters, "duplicate");
+    }
+
+    private static Counter submissions(MeterRegistry meters, String result) {
+        return Counter.builder("leaderboard.submissions")
+                .description("Accepted SubmitScore calls by outcome")
+                .tag("result", result)
+                .register(meters);
     }
 
     /**
@@ -32,6 +49,7 @@ public class LeaderboardService {
     public SubmitOutcome submit(ScoreSubmission submission) {
         SubmitOutcome outcome = store.submit(submission);
         ranking.add(outcome.entry());
+        (outcome.duplicate() ? duplicate : outcome.improved() ? improved : notImproved).increment();
         return outcome;
     }
 

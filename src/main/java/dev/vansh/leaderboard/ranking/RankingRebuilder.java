@@ -2,6 +2,8 @@ package dev.vansh.leaderboard.ranking;
 
 import dev.vansh.leaderboard.core.RankingEntry;
 import dev.vansh.leaderboard.store.ScoreStore;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,10 +33,15 @@ public class RankingRebuilder implements ApplicationRunner {
 
     private final ScoreStore store;
     private final RankingStore ranking;
+    private final Counter rebuilds;
 
-    public RankingRebuilder(ScoreStore store, RankingStore ranking) {
+    public RankingRebuilder(ScoreStore store, RankingStore ranking, MeterRegistry meters) {
         this.store = store;
         this.ranking = ranking;
+        // Should stay at zero in steady state; alert if it moves (Redis lost data).
+        this.rebuilds = Counter.builder("leaderboard.rebuilds")
+                .description("Leaderboards rebuilt from Postgres because Redis was missing members")
+                .register(meters);
     }
 
     /**
@@ -70,6 +77,7 @@ public class RankingRebuilder implements ApplicationRunner {
                 log.warn("leaderboard '{}' has {} of {} members in Redis; rebuilding from Postgres",
                         leaderboardId, actual, expected);
                 rebuild(leaderboardId);
+                rebuilds.increment();
                 rebuilt++;
             }
         }
