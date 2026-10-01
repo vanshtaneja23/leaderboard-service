@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: leaderboard-service
+  grpc:
+    server:
+      port: ${GRPC_PORT:9090}
