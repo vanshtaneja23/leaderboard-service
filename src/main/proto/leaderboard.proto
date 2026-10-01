@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+package leaderboard.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_package = "dev.vansh.leaderboard.proto.v1";
+option java_outer_classname = "LeaderboardProto";
+
+// Player stats & leaderboard API.
+//
+// Error model (canonical gRPC status codes):
+//   INVALID_ARGUMENT  - a field fails validation (empty id, score out of range, n out of range, ...)
+//   NOT_FOUND         - the leaderboard has no entries, or the player has no score / no stats
+//   ALREADY_EXISTS    - an idempotency_key was reused with a *different* payload
+//   UNAVAILABLE       - a dependency (Postgres/Redis) is down; safe to retry with the same idempotency_key
+service LeaderboardService {
+  // Records one game result. Idempotent on idempotency_key: a retry with the same key and the
+  // same payload returns the original result and does not double-count.
+  rpc SubmitScore(SubmitScoreRequest) returns (SubmitScoreResponse);
+
+  // Highest-ranked players first. Equal scores: the earlier submission ranks higher.
+  rpc GetTopN(GetTopNRequest) returns (GetTopNResponse);
+
+  // A player's rank plus up to `neighbors` players directly above and below.
+  rpc GetPlayerRank(GetPlayerRankRequest) returns (GetPlayerRankResponse);
+
+  // Lifetime stats for a player across all leaderboards.
+  rpc GetPlayerStats(GetPlayerStatsRequest) returns (GetPlayerStatsResponse);
+}
+
+message SubmitScoreRequest {
+  string player_id = 1;
+  string leaderboard_id = 2;
+  int64 score = 3;
+  // Client-generated (e.g. a UUID) and reused on every retry of the same logical submission.
+  string idempotency_key = 4;
+}
+
+message SubmitScoreResponse {
+  // The player's best score on this leaderboard after this submission.
+  int64 best_score = 1;
+  // True if this submission raised the player's best score.
+  bool improved = 2;
+  // True if this idempotency_key had already been processed; nothing was counted again.
+  bool duplicate = 3;
+}
+
+message GetTopNRequest {
+  string leaderboard_id = 1;
+  int32 n = 2;
+}
+
+message GetTopNResponse {
+  repeated RankedEntry entries = 1;
+}
+
+message GetPlayerRankRequest {
+  string leaderboard_id = 1;
+  string player_id = 2;
+  int32 neighbors = 3;
+}
+
+message GetPlayerRankResponse {
+  RankedEntry player = 1;
+  // Ordered best-first: `above` ends with the player directly above `player`.
+  repeated RankedEntry above = 2;
+  // Ordered best-first: `below` starts with the player directly below `player`.
+  repeated RankedEntry below = 3;
+}
+
+message GetPlayerStatsRequest {
+  string player_id = 1;
+}
+
+message GetPlayerStatsResponse {
+  string player_id = 1;
+  int64 games_played = 2;
+  int64 best_score = 3;
+  google.protobuf.Timestamp last_updated = 4;
+}
+
+message RankedEntry {
+  // 1-based. No two players share a rank: ties are broken by submission order.
+  int64 rank = 1;
+  string player_id = 2;
+  int64 score = 3;
+}
