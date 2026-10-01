@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.jdbc.core.simple.JdbcClient;
 
 /**
@@ -22,8 +24,19 @@ public abstract class IntegrationTest {
     @Autowired
     protected JdbcClient jdbc;
 
+    @Autowired
+    protected StringRedisTemplate redis;
+
     @BeforeEach
-    void resetDatabase() {
+    void resetState() {
         jdbc.sql("TRUNCATE leaderboard_entries, player_stats, score_events RESTART IDENTITY CASCADE").update();
+        flushRedis();
+    }
+
+    protected void flushRedis() {
+        redis.execute((RedisCallback<Void>) connection -> {
+            connection.serverCommands().flushAll();
+            return null;
+        });
     }
 }
