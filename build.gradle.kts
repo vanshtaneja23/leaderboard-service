@@ -61,3 +61,11 @@ tasks.withType<Test> {
         exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
     }
 }
+
+// One predictable artifact for the Dockerfile; the "plain" (non-executable) jar is not needed.
+tasks.bootJar {
+    archiveFileName = "leaderboard-service.jar"
+}
+tasks.jar {
+    enabled = false
+}
